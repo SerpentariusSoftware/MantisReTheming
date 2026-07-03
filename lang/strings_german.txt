@@ -1,0 +1,21 @@
+<?php
+/**
+ * Language File - German
+ */
+
+$s_plugin_ReTheming_title = 'Re-Theming';
+$s_plugin_ReTheming_description = 'Ermöglicht Administratoren die Auswahl eines standardmäßigen Designs für die gesamte Seite und Benutzern die Auswahl eines eigenen Designs aus derselben kuratierten Liste.';
+
+$s_plugin_ReTheming_config_title = 'Re-Theming Konfiguration';
+$s_plugin_ReTheming_default_theme = 'Standarddesign';
+
+$s_plugin_ReTheming_theme = 'Design';
+$s_plugin_ReTheming_theme_default = 'Standard';
+$s_plugin_ReTheming_theme_dark = 'Dunkel';
+$s_plugin_ReTheming_theme_dracula = 'Dracula';
+$s_plugin_ReTheming_theme_nord = 'Nord';
+$s_plugin_ReTheming_theme_one_dark = 'One Dark';
+$s_plugin_ReTheming_theme_gruvbox_dark = 'Gruvbox Dark';
+$s_plugin_ReTheming_theme_solarized_dark = 'Solarized Dark';
+
+$s_plugin_ReTheming_action_update = 'Einstellungen speichern';

@@ -1,0 +1,29 @@
+/**
+ * Re-Theming Plugin - "Dracula" palette
+ * Canonical colors from https://draculatheme.com/contribute (background,
+ * current line, foreground, comment, purple, pink, cyan, green, orange,
+ * red, yellow). Paired with _base.css, which does the actual selector work.
+ */
+:root {
+	--rt-bg: #282a36;
+	--rt-bg-elevated: #21222c;
+	--rt-surface: #282a36;
+	--rt-surface-alt: #343746;
+	--rt-surface-muted: #21222c;
+	--rt-sidebar: #21222c;
+	--rt-sidebar-alt: #191a21;
+	--rt-hover: #44475a;
+	--rt-active: #44475a;
+	--rt-border: #44475a;
+	--rt-border-alt: #3a3d4d;
+	--rt-border-strong: #6272a4;
+	--rt-fg: #f8f8f2;
+	--rt-fg-strong: #ffffff;
+	--rt-fg-muted: #6272a4;
+	--rt-fg-disabled: #6272a4;
+	--rt-accent: #bd93f9;
+	--rt-accent-hover: #ff79c6;
+	--rt-accent-fg: #282a36;
+	--rt-warn-bg: #4b3a2f;
+	--rt-warn-fg: #ffb86c;
+}

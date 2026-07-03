@@ -1,0 +1,28 @@
+/**
+ * Re-Theming Plugin - "One Dark" palette (Atom's default dark theme)
+ * Canonical colors from the atom/one-dark-ui and one-dark-syntax themes.
+ * Paired with _base.css, which does the actual selector work.
+ */
+:root {
+	--rt-bg: #282c34;
+	--rt-bg-elevated: #21252b;
+	--rt-surface: #282c34;
+	--rt-surface-alt: #2c313c;
+	--rt-surface-muted: #21252b;
+	--rt-sidebar: #21252b;
+	--rt-sidebar-alt: #1b1d23;
+	--rt-hover: #2c313c;
+	--rt-active: #3e4451;
+	--rt-border: #3e4451;
+	--rt-border-alt: #333842;
+	--rt-border-strong: #4b5263;
+	--rt-fg: #abb2bf;
+	--rt-fg-strong: #dcdfe4;
+	--rt-fg-muted: #5c6370;
+	--rt-fg-disabled: #5c6370;
+	--rt-accent: #61afef;
+	--rt-accent-hover: #82c1f5;
+	--rt-accent-fg: #282c34;
+	--rt-warn-bg: #453a2c;
+	--rt-warn-fg: #e5c07b;
+}

@@ -1,0 +1,21 @@
+<?php
+/**
+ * Language File - Hungarian
+ */
+
+$s_plugin_ReTheming_title = 'Re-Theming';
+$s_plugin_ReTheming_description = 'Lehetővé teszi az adminisztrátor számára egy alapértelmezett, oldal szintű téma kiválasztását, valamint minden felhasználónak, hogy ugyanabból a válogatott listából saját témát válasszon.';
+
+$s_plugin_ReTheming_config_title = 'Re-Theming beállítások';
+$s_plugin_ReTheming_default_theme = 'Alapértelmezett téma';
+
+$s_plugin_ReTheming_theme = 'Téma';
+$s_plugin_ReTheming_theme_default = 'Alapértelmezett';
+$s_plugin_ReTheming_theme_dark = 'Sötét';
+$s_plugin_ReTheming_theme_dracula = 'Dracula';
+$s_plugin_ReTheming_theme_nord = 'Nord';
+$s_plugin_ReTheming_theme_one_dark = 'One Dark';
+$s_plugin_ReTheming_theme_gruvbox_dark = 'Gruvbox Dark';
+$s_plugin_ReTheming_theme_solarized_dark = 'Solarized Dark';
+
+$s_plugin_ReTheming_action_update = 'Beállítások mentése';

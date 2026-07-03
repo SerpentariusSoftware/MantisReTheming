@@ -1,0 +1,21 @@
+<?php
+/**
+ * Language File - Spanish
+ */
+
+$s_plugin_ReTheming_title = 'Re-Theming';
+$s_plugin_ReTheming_description = 'Permite al administrador elegir un tema predeterminado para todo el sitio, y permite a cada usuario elegir su propio tema de la misma lista seleccionada.';
+
+$s_plugin_ReTheming_config_title = 'Configuración de Re-Theming';
+$s_plugin_ReTheming_default_theme = 'Tema predeterminado';
+
+$s_plugin_ReTheming_theme = 'Tema';
+$s_plugin_ReTheming_theme_default = 'Predeterminado';
+$s_plugin_ReTheming_theme_dark = 'Oscuro';
+$s_plugin_ReTheming_theme_dracula = 'Dracula';
+$s_plugin_ReTheming_theme_nord = 'Nord';
+$s_plugin_ReTheming_theme_one_dark = 'One Dark';
+$s_plugin_ReTheming_theme_gruvbox_dark = 'Gruvbox Dark';
+$s_plugin_ReTheming_theme_solarized_dark = 'Solarized Dark';
+
+$s_plugin_ReTheming_action_update = 'Guardar configuración';

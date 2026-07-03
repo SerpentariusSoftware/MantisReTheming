@@ -1,0 +1,30 @@
+/**
+ * Re-Theming Plugin - "Solarized Dark" palette
+ * Canonical colors from Ethan Schoonover's spec
+ * (https://ethanschoonover.com/solarized/): base03/02 backgrounds,
+ * base01/00/0/1 text tones, and the accent hues. Paired with _base.css,
+ * which does the actual selector work.
+ */
+:root {
+	--rt-bg: #002b36;        /* base03 */
+	--rt-bg-elevated: #00212b;
+	--rt-surface: #073642;   /* base02 */
+	--rt-surface-alt: #0a4152;
+	--rt-surface-muted: #00212b;
+	--rt-sidebar: #00212b;
+	--rt-sidebar-alt: #001920;
+	--rt-hover: #073642;     /* base02 */
+	--rt-active: #0a4152;
+	--rt-border: #073642;    /* base02 */
+	--rt-border-alt: #0a4152;
+	--rt-border-strong: #586e75; /* base01 */
+	--rt-fg: #839496;        /* base0 */
+	--rt-fg-strong: #93a1a1; /* base1 */
+	--rt-fg-muted: #586e75;  /* base01 */
+	--rt-fg-disabled: #586e75; /* base01 */
+	--rt-accent: #268bd2;    /* blue */
+	--rt-accent-hover: #2aa198; /* cyan */
+	--rt-accent-fg: #002b36;
+	--rt-warn-bg: #3a3005;
+	--rt-warn-fg: #b58900;   /* yellow */
+}

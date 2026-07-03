@@ -1,0 +1,29 @@
+/**
+ * Re-Theming Plugin - "Nord" palette
+ * Canonical colors from https://www.nordtheme.com/docs/colors-and-palettes
+ * (Polar Night nord0-3, Snow Storm nord4-6, Frost nord7-10, Aurora
+ * nord11-15). Paired with _base.css, which does the actual selector work.
+ */
+:root {
+	--rt-bg: #2e3440;        /* nord0 */
+	--rt-bg-elevated: #262b33;
+	--rt-surface: #3b4252;   /* nord1 */
+	--rt-surface-alt: #434c5e; /* nord2 */
+	--rt-surface-muted: #2e3440; /* nord0 */
+	--rt-sidebar: #2e3440;   /* nord0 */
+	--rt-sidebar-alt: #262b33;
+	--rt-hover: #434c5e;     /* nord2 */
+	--rt-active: #4c566a;    /* nord3 */
+	--rt-border: #434c5e;    /* nord2 */
+	--rt-border-alt: #3b4252; /* nord1 */
+	--rt-border-strong: #4c566a; /* nord3 */
+	--rt-fg: #d8dee9;        /* nord4 */
+	--rt-fg-strong: #eceff4; /* nord6 */
+	--rt-fg-muted: #4c566a;  /* nord3 */
+	--rt-fg-disabled: #4c566a; /* nord3 */
+	--rt-accent: #88c0d0;    /* nord8 */
+	--rt-accent-hover: #8fbcbb; /* nord7 */
+	--rt-accent-fg: #2e3440;
+	--rt-warn-bg: #4c3f33;
+	--rt-warn-fg: #ebcb8b;   /* nord13 */
+}

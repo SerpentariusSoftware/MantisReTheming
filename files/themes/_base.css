@@ -1,0 +1,365 @@
+/**
+ * Re-Theming Plugin - shared structural overrides
+ *
+ * Every dark-style theme loads this file plus a small palette file (see
+ * palette-*.css) that only sets the --rt-* custom properties below. This
+ * file is the single place that knows *which* MantisBT selectors need
+ * overriding; palette files only know *what colors* to use.
+ *
+ * Overrides target MantisBT's stock ACE/Bootstrap 3 skin (css/default.css,
+ * css/ace.css, css/ace-mantis.css). Loaded after all of those (see
+ * ReThemingPlugin::on_layout_resources()), so rules here only need to be
+ * as specific as whatever they're overriding - matched with !important
+ * where the base skin itself uses !important.
+ *
+ * Fallback values (the second argument to each var()) are the "Dark"
+ * theme's palette, so this file still renders sensibly even if a palette
+ * file forgets to set a token.
+ */
+
+html, body {
+	background-color: var(--rt-bg, #1b1e23) !important;
+	color: var(--rt-fg, #d3d6db);
+}
+
+a,
+a:visited {
+	color: var(--rt-accent, #6ab0f3);
+}
+a:hover, a:focus { color: var(--rt-accent-hover, #8fc4f7); }
+
+/* ace-mantis.css unconditionally forces every <table> to a white
+   background with !important ("table { background-color: #fff !important }")
+   - this alone is why an unqualified .table rule never took effect. */
+table {
+	background-color: var(--rt-surface, #22252c) !important;
+}
+
+/* Same file also forces the decorative header gradient and the login
+   panel background to solid white with !important. */
+.skin-3 .main-container:before,
+.light-login {
+	background: var(--rt-bg, #1b1e23) !important;
+}
+
+/* Top navbar */
+.skin-3 .navbar,
+#navbar,
+#navbar-container {
+	background-color: var(--rt-bg-elevated, #14161a) !important;
+	border-color: #000;
+}
+.navbar .navbar-toggle {
+	background-color: var(--rt-hover, #2b2f38) !important;
+}
+
+/* Sidebar (ACE skin-3 nav list) */
+.skin-3 .sidebar {
+	background-color: var(--rt-sidebar, #1f2229);
+	border-color: var(--rt-border, #2a2e37);
+}
+.skin-3 .nav-list > li {
+	background-color: var(--rt-sidebar, #1f2229);
+	border-color: var(--rt-border, #2a2e37);
+}
+.skin-3 .nav-list > li > a {
+	color: var(--rt-fg-muted, #c4c8cf);
+	background-color: var(--rt-sidebar, #1f2229);
+}
+.skin-3 .nav-list > li:hover > a,
+.skin-3 .nav-list > li.open > a,
+.skin-3 .nav-list > li.open:hover > a {
+	background-color: var(--rt-hover, #262b34);
+	color: var(--rt-fg-strong, #fff);
+}
+.skin-3 .nav-list > li.active > a,
+.skin-3 .nav-list > li.active.highlight > a {
+	background-color: var(--rt-active, #2f3644) !important;
+	color: var(--rt-accent-hover, #8fc4f7) !important;
+}
+.skin-3 .nav-list > li > .submenu {
+	background-color: var(--rt-sidebar-alt, #1a1d23);
+}
+.sidebar-toggle,
+.skin-3 .sidebar-toggle {
+	background-color: var(--rt-hover, #2b2f38);
+	border-color: var(--rt-border, #2a2e37);
+}
+
+/* Main content area */
+.main-content,
+.page-content {
+	background-color: var(--rt-bg, #1b1e23) !important;
+	color: var(--rt-fg, #d3d6db);
+}
+
+.breadcrumbs {
+	background-color: var(--rt-bg-elevated, #14161a);
+	border-color: var(--rt-border, #2a2e37);
+}
+.breadcrumb > li,
+.breadcrumb > .active {
+	color: var(--rt-fg-muted, #c4c8cf);
+}
+.breadcrumbs .nav-search-input {
+	background-color: var(--rt-bg-elevated, #14161a);
+	border-color: var(--rt-border-strong, #3a3f48);
+	color: var(--rt-fg-strong, #e4e6ea);
+}
+
+/* Widgets (the boxed panels used throughout MantisBT) */
+.widget-box {
+	background-color: var(--rt-surface, #22252c);
+	border-color: var(--rt-border, #2a2e37);
+}
+.widget-header {
+	background-color: var(--rt-surface-alt, #262a32);
+	border-color: var(--rt-border, #2a2e37);
+}
+.widget-title {
+	color: var(--rt-fg-strong, #e4e6ea);
+}
+.widget-body,
+.widget-main {
+	background-color: var(--rt-surface, #22252c);
+	color: var(--rt-fg, #d3d6db);
+}
+.widget-toolbox {
+	background-color: var(--rt-surface-muted, #1e2127);
+	border-color: var(--rt-border, #2a2e37);
+}
+
+/* Tables */
+.table {
+	color: var(--rt-fg, #d3d6db);
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td,
+.table-bordered,
+.table-bordered > thead > tr > th,
+.table-bordered > tbody > tr > th,
+.table-bordered > thead > tr > td,
+.table-bordered > tbody > tr > td {
+	border-color: var(--rt-border-alt, #33383f);
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+	background-color: var(--rt-surface-alt, #24272e);
+}
+.table-hover > tbody > tr:hover {
+	background-color: var(--rt-hover, #2b2f38);
+}
+td.category, th.category,
+td.category label, th.category label {
+	background-color: var(--rt-surface-alt, #262a32) !important;
+	color: var(--rt-fg, #d3d6db);
+}
+
+/* Forms */
+.input-sm,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+textarea,
+select,
+.form-control {
+	background-color: var(--rt-bg-elevated, #14161a);
+	border-color: var(--rt-border-strong, #3a3f48);
+	color: var(--rt-fg-strong, #e4e6ea);
+}
+.form-control:focus {
+	background-color: var(--rt-bg-elevated, #14161a);
+	border-color: var(--rt-accent, #6ab0f3);
+	color: var(--rt-fg-strong, #e4e6ea);
+}
+::placeholder {
+	color: var(--rt-fg-disabled, #7a7f88);
+}
+
+/* Bootstrap gives readonly .form-control fields a light gray background
+   with higher specificity than the plain .form-control rule above
+   (bootstrap-3.4.1.css: ".form-control[readonly] { background-color:
+   #eee }") - e.g. Manage Columns' "All Available Columns" list. Left
+   alone that pairs our light text with a near-white background, unlike
+   :focus (equal specificity, but we load later so we still win there). */
+.form-control[readonly],
+input[readonly],
+textarea[readonly] {
+	background-color: var(--rt-surface-muted, #1e2127) !important;
+	color: var(--rt-fg, #d3d6db) !important;
+}
+
+/* Buttons */
+.btn-white {
+	background-color: var(--rt-hover, #2b2f38);
+	color: var(--rt-fg, #d3d6db);
+	border-color: var(--rt-border-strong, #3a3f48);
+}
+
+/* Issue list / bugnotes */
+#buglist td, #buglist th {
+	border-color: var(--rt-border-alt, #33383f);
+}
+.bugnote,
+.bug-note {
+	background-color: var(--rt-surface, #22252c);
+	border-color: var(--rt-border, #2a2e37);
+}
+
+/* Dropdowns / menus. Descendant (not direct-child) selectors: some
+   menus (e.g. the navbar's project switcher) wrap their <li> items in an
+   extra nested <ul class="list">, so a ">" combinator here would miss
+   them entirely. */
+.dropdown-menu {
+	background-color: var(--rt-surface, #22252c);
+	border-color: var(--rt-border, #2a2e37);
+}
+.dropdown-menu li > a {
+	color: var(--rt-fg, #d3d6db);
+}
+.dropdown-menu li:hover > a,
+.dropdown-menu li > a:hover,
+.dropdown-menu li > a:focus {
+	background-color: var(--rt-hover, #2b2f38);
+	color: var(--rt-fg-strong, #fff);
+}
+
+/* ACE's colored dropdown variants (ace.css) hardcode their own
+   hover/active/focus background per color, independently of the plain
+   .dropdown-menu rules above - e.g. the project switcher's "current
+   project" highlight uses dropdown-yellow's #FEE188. */
+.dropdown-yellow > li:hover > a,
+.dropdown-yellow > li > a:focus,
+.dropdown-yellow > li > a:active,
+.dropdown-yellow > li.active > a,
+.dropdown-yellow > li.active:hover > a,
+.dropdown-yellow2 > li:hover > a,
+.dropdown-yellow2 > li > a:focus,
+.dropdown-yellow2 > li > a:active,
+.dropdown-yellow2 > li.active > a,
+.dropdown-yellow2 > li.active:hover > a,
+.dropdown-light-blue > li:hover > a,
+.dropdown-light-blue > li > a:focus,
+.dropdown-light-blue > li > a:active,
+.dropdown-light-blue > li.active > a,
+.dropdown-light-blue > li.active:hover > a {
+	background: var(--rt-active, #2f3644);
+	color: var(--rt-accent-hover, #8fc4f7);
+}
+
+/* Horizontal rules / separators */
+hr {
+	border-color: var(--rt-border, #2a2e37);
+}
+
+/* default.css hardcodes this spacer row to white with !important */
+tr.spacer {
+	background-color: var(--rt-bg, #1b1e23) !important;
+}
+
+/* Private bugnote highlight (default.css: #fcf8e3 !important) */
+.bugnote-private {
+	background-color: var(--rt-warn-bg, #4a3f1f) !important;
+	color: var(--rt-warn-fg, #f0e6c8);
+}
+
+/* Disabled form controls (ace-mantis.css: #eee / #848484 !important) */
+select[disabled],
+input[disabled],
+textarea[disabled] {
+	background-color: var(--rt-surface-muted, #1e2127) !important;
+	color: var(--rt-fg-disabled, #6b7078) !important;
+}
+
+/* Typeahead (project/user pickers) */
+input.tt-hint {
+	background-color: var(--rt-bg-elevated, #14161a) !important;
+	color: var(--rt-fg-disabled, #6b7078) !important;
+}
+.tt-menu {
+	background-color: var(--rt-surface, #22252c);
+	border-color: var(--rt-border, #2a2e37);
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Badges & the well panel */
+.badge {
+	background-color: var(--rt-border-strong, #3a3f48);
+	color: var(--rt-fg-strong, #e4e6ea);
+}
+.well {
+	background-color: var(--rt-surface-muted, #1e2127);
+	border-color: var(--rt-border, #2a2e37);
+	color: var(--rt-fg, #d3d6db);
+}
+
+/* Pagination / pager */
+.pagination > li > a,
+.pager > li > a {
+	background-color: var(--rt-surface, #22252c);
+	border-color: var(--rt-border, #2a2e37);
+	color: var(--rt-fg, #d3d6db);
+}
+.pagination > li > a:hover,
+.pager > li > a:hover {
+	background-color: var(--rt-hover, #2b2f38);
+	color: var(--rt-fg-strong, #fff);
+}
+.pagination > li.active > a,
+.pagination > li.active > a:hover {
+	background-color: var(--rt-accent, #6ab0f3);
+	border-color: var(--rt-accent, #6ab0f3);
+	color: var(--rt-accent-fg, #14161a);
+}
+.pagination > li.disabled > a,
+.pager > li.disabled > a {
+	background-color: var(--rt-surface-muted, #1e2127);
+	color: var(--rt-fg-disabled, #6b7078);
+}
+
+/* ACE checkboxes/radios (ace.css hardcodes an off-white box) */
+input[type="checkbox"].ace + .lbl::before,
+input[type="radio"].ace + .lbl::before {
+	background-color: var(--rt-surface, #22252c);
+	border-color: var(--rt-border-strong, #3a3f48);
+	color: var(--rt-fg, #d3d6db);
+}
+input[type="checkbox"].ace:checked + .lbl::before,
+input[type="radio"].ace:checked + .lbl::before {
+	background-color: var(--rt-accent, #6ab0f3);
+	border-color: var(--rt-accent, #6ab0f3);
+	color: var(--rt-accent-fg, #14161a);
+}
+
+/* Bootstrap datetimepicker popup */
+.bootstrap-datetimepicker-widget {
+	background-color: var(--rt-surface, #22252c);
+	color: var(--rt-fg, #d3d6db);
+}
+.bootstrap-datetimepicker-widget table td,
+.bootstrap-datetimepicker-widget table th {
+	color: var(--rt-fg, #d3d6db);
+}
+.bootstrap-datetimepicker-widget table td.day:hover,
+.bootstrap-datetimepicker-widget table td.hour:hover,
+.bootstrap-datetimepicker-widget table td.minute:hover,
+.bootstrap-datetimepicker-widget table td.second:hover,
+.bootstrap-datetimepicker-widget table thead tr:first-child th:hover {
+	background-color: var(--rt-hover, #2b2f38);
+}
+.bootstrap-datetimepicker-widget table td.disabled,
+.bootstrap-datetimepicker-widget table td.disabled:hover,
+.bootstrap-datetimepicker-widget table td.old,
+.bootstrap-datetimepicker-widget table td.new {
+	color: var(--rt-fg-disabled, #6b7078);
+}
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover {
+	background-color: var(--rt-accent, #6ab0f3);
+	color: var(--rt-accent-fg, #14161a);
+}

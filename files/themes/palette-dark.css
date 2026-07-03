@@ -1,0 +1,27 @@
+/**
+ * Re-Theming Plugin - "Dark" palette (in-house, blue-gray slate)
+ * Paired with _base.css, which does the actual selector work.
+ */
+:root {
+	--rt-bg: #1b1e23;
+	--rt-bg-elevated: #14161a;
+	--rt-surface: #22252c;
+	--rt-surface-alt: #262a32;
+	--rt-surface-muted: #1e2127;
+	--rt-sidebar: #1f2229;
+	--rt-sidebar-alt: #1a1d23;
+	--rt-hover: #2b2f38;
+	--rt-active: #2f3644;
+	--rt-border: #2a2e37;
+	--rt-border-alt: #33383f;
+	--rt-border-strong: #3a3f48;
+	--rt-fg: #d3d6db;
+	--rt-fg-strong: #e4e6ea;
+	--rt-fg-muted: #c4c8cf;
+	--rt-fg-disabled: #6b7078;
+	--rt-accent: #6ab0f3;
+	--rt-accent-hover: #8fc4f7;
+	--rt-accent-fg: #14161a;
+	--rt-warn-bg: #4a3f1f;
+	--rt-warn-fg: #f0e6c8;
+}

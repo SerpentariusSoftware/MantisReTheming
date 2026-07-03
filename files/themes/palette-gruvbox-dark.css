@@ -1,0 +1,29 @@
+/**
+ * Re-Theming Plugin - "Gruvbox Dark" palette
+ * Canonical colors from https://github.com/morhetz/gruvbox (bg0/bg0_h,
+ * bg1-4, fg0-4, gray, and the bright accent variants). Paired with
+ * _base.css, which does the actual selector work.
+ */
+:root {
+	--rt-bg: #282828;        /* bg0 */
+	--rt-bg-elevated: #1d2021; /* bg0_h */
+	--rt-surface: #282828;   /* bg0 */
+	--rt-surface-alt: #3c3836; /* bg1 */
+	--rt-surface-muted: #1d2021; /* bg0_h */
+	--rt-sidebar: #1d2021;   /* bg0_h */
+	--rt-sidebar-alt: #161819;
+	--rt-hover: #3c3836;     /* bg1 */
+	--rt-active: #504945;    /* bg2 */
+	--rt-border: #504945;    /* bg2 */
+	--rt-border-alt: #3c3836; /* bg1 */
+	--rt-border-strong: #665c54; /* bg3 */
+	--rt-fg: #ebdbb2;        /* fg1 */
+	--rt-fg-strong: #fbf1c7; /* fg0 */
+	--rt-fg-muted: #a89984;  /* fg4 */
+	--rt-fg-disabled: #928374; /* gray */
+	--rt-accent: #fe8019;    /* bright orange */
+	--rt-accent-hover: #fabd2f; /* bright yellow */
+	--rt-accent-fg: #282828;
+	--rt-warn-bg: #3c3836;
+	--rt-warn-fg: #fabd2f;   /* bright yellow */
+}
