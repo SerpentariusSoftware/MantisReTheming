@@ -93,12 +93,20 @@ table {
 	color: var(--rt-fg, #d3d6db);
 }
 
+/* ace-skins.css's ".skin-3 .breadcrumbs { background-color: #E7F2F8 }" is
+   more specific than a plain ".breadcrumbs" rule, so it wins regardless
+   of load order - match its specificity rather than reach for
+   !important. That light-blue background is also what made "Recently
+   Visited: <id>" (plain text, .nav-recent below) hard to read: it
+   inherits our muted foreground color, which assumes a dark background. */
+.skin-3 .breadcrumbs,
 .breadcrumbs {
 	background-color: var(--rt-bg-elevated, #14161a);
 	border-color: var(--rt-border, #2a2e37);
 }
 .breadcrumb > li,
-.breadcrumb > .active {
+.breadcrumb > .active,
+.nav-recent {
 	color: var(--rt-fg-muted, #c4c8cf);
 }
 .breadcrumbs .nav-search-input {
@@ -107,13 +115,16 @@ table {
 	color: var(--rt-fg-strong, #e4e6ea);
 }
 
-/* Widgets (the boxed panels used throughout MantisBT) */
+/* Widgets (the boxed panels used throughout MantisBT). !important here
+   because ace.css's own .widget-body rule has tripped up an "equal
+   specificity, later wins" assumption once already (see the table fix
+   above) - not worth re-litigating per page. */
 .widget-box {
-	background-color: var(--rt-surface, #22252c);
+	background-color: var(--rt-surface, #22252c) !important;
 	border-color: var(--rt-border, #2a2e37);
 }
 .widget-header {
-	background-color: var(--rt-surface-alt, #262a32);
+	background-color: var(--rt-surface-alt, #262a32) !important;
 	border-color: var(--rt-border, #2a2e37);
 }
 .widget-title {
@@ -121,12 +132,45 @@ table {
 }
 .widget-body,
 .widget-main {
-	background-color: var(--rt-surface, #22252c);
+	background-color: var(--rt-surface, #22252c) !important;
 	color: var(--rt-fg, #d3d6db);
 }
 .widget-toolbox {
-	background-color: var(--rt-surface-muted, #1e2127);
+	background-color: var(--rt-surface-muted, #1e2127) !important;
 	border-color: var(--rt-border, #2a2e37);
+}
+
+/* The login/signup/lost-password box's bottom bar (ace-mantis.css:
+   ".signup-box .toolbar { background: #393939 }") - keep it on-palette. */
+.signup-box .toolbar {
+	background: var(--rt-surface-muted, #1e2127) !important;
+}
+
+/* Bootstrap alert boxes (session-expired warnings, "admin dir should be
+   removed", form validation errors, etc.) */
+.alert {
+	color: var(--rt-fg, #d3d6db);
+	border-color: var(--rt-border, #2a2e37);
+}
+.alert-success {
+	background-color: #16321f;
+	border-color: #234a2c;
+	color: #9fe0ae;
+}
+.alert-info {
+	background-color: #16283a;
+	border-color: #1e3a52;
+	color: #9cc7ec;
+}
+.alert-warning {
+	background-color: var(--rt-warn-bg, #4a3f1f);
+	border-color: var(--rt-border, #2a2e37);
+	color: var(--rt-warn-fg, #f0e6c8);
+}
+.alert-danger {
+	background-color: #3a1f22;
+	border-color: #52272c;
+	color: #eda3ab;
 }
 
 /* Tables */

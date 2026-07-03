@@ -2,7 +2,36 @@
 
 ## Unreleased
 
-- Fixed three contrast/color bugs found on the Manage Plugins and My
+- Fixed the breadcrumb bar (and its "Recently Visited: <id>" text)
+  staying light blue: `ace-skins.css` sets `.skin-3 .breadcrumbs {
+  background-color: #E7F2F8 }`, which outranks a plain `.breadcrumbs`
+  rule on specificity alone regardless of load order. Matched that
+  specificity instead of reaching for `!important`.
+
+## 0.2.0
+
+- Fixed the theme stylesheet not actually applying: it was injected via
+  `require_css()` on `EVENT_CORE_READY`, which MantisBT prints in
+  `html_css()` *before* `layout_head_css()` loads Bootstrap/ace.css/
+  ace-mantis.css - so every `!important` rule in this plugin's theme lost
+  the cascade to MantisBT's own later, equally-`!important` rules (most
+  visibly the global `table { background-color: #fff !important }`).
+  Switched to `EVENT_LAYOUT_RESOURCES`, which fires right before
+  `</head>`, after all of MantisBT's own stylesheets.
+- Expanded Dark theme coverage: tables, navbar, sidebar active/hover
+  states, breadcrumb search box, badges, `.well`, pagination, ACE
+  checkboxes/radios, disabled form controls, typeahead dropdowns, and the
+  Bootstrap datetimepicker popup. Selector coverage cross-checked against
+  the (unlicensed, so not copied from directly) `MantisBTDarkTheme` plugin
+  as a "what needs recoloring" reference; colors/rules here are original.
+- Added five more themes: Dracula, Nord, One Dark, Gruvbox Dark, and
+  Solarized Dark, all using their respective projects' canonical color
+  values.
+- Refactored theme CSS into a shared `_base.css` (selector overrides,
+  written against `--rt-*` custom properties) plus one small
+  `palette-*.css` file per theme (just the property values) - adding a
+  theme is now a ~20-line palette file instead of a ~300-line stylesheet.
+- Fixed three more contrast/color bugs found on the Manage Plugins and My
   Account pages:
   - `a:visited` was unstyled, so previously-visited links fell back to
     the browser's default purple instead of the theme's accent color.
@@ -17,29 +46,18 @@
     Columns" list) get a light gray background from Bootstrap with
     higher specificity than our plain `.form-control` rule, pairing our
     light theme text with a near-white background until focused.
-- Added five more themes: Dracula, Nord, One Dark, Gruvbox Dark, and
-  Solarized Dark, all using their respective projects' canonical color
-  values.
-- Refactored theme CSS into a shared `_base.css` (selector overrides,
-  written against `--rt-*` custom properties) plus one small
-  `palette-*.css` file per theme (just the property values) - adding a
-  theme is now a ~20-line palette file instead of a ~300-line stylesheet.
-- Fixed the theme stylesheet not actually applying: it was injected via
-  `require_css()` on `EVENT_CORE_READY`, which MantisBT prints in
-  `html_css()` *before* `layout_head_css()` loads Bootstrap/ace.css/
-  ace-mantis.css - so every `!important` rule in this plugin's theme lost
-  the cascade to MantisBT's own later, equally-`!important` rules (most
-  visibly the global `table { background-color: #fff !important }`).
-  Switched to `EVENT_LAYOUT_RESOURCES`, which fires right before
-  `</head>`, after all of MantisBT's own stylesheets.
-- Expanded Dark theme coverage: tables (MantisBT's `table { background:
-  #fff !important }` was overriding the previous pass entirely), navbar,
-  sidebar active/hover states, breadcrumb search box, badges, `.well`,
-  pagination, ACE checkboxes/radios, disabled form controls, typeahead
-  dropdowns, and the Bootstrap datetimepicker popup.
-- Selector coverage cross-checked against the (unlicensed, so not copied
-  from directly) `MantisBTDarkTheme` plugin as a "what needs recoloring"
-  reference; colors/rules here are original.
+- Theme stylesheet URLs now carry a `?v=<plugin version>` cache-busting
+  parameter. `plugin_file.php` serves them with a 3-hour `Cache-Control:
+  private, max-age=10800` and an otherwise-unchanging URL, so without
+  this, an edited theme could keep rendering its previous content in an
+  already-loaded browser for up to 3 hours.
+- Styled Bootstrap `.alert` boxes (session-expired warnings, install
+  warnings, form errors) - previously unstyled on the login/signup/
+  lost-password pages.
+- Hardened `.widget-box`/`.widget-header`/`.widget-body`/`.widget-main`/
+  `.widget-toolbox` with `!important`, and themed the login box's bottom
+  toolbar (`.signup-box .toolbar`, hardcoded to `#393939` in
+  ace-mantis.css).
 
 ## 0.1.0
 

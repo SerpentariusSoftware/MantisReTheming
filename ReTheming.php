@@ -79,7 +79,7 @@ class ReThemingPlugin extends MantisPlugin {
 		$this->description = plugin_lang_get( 'description' );
 		$this->page = 'config_page';
 
-		$this->version = '0.1.0';
+		$this->version = '0.2.0';
 		$this->requires = array(
 			'MantisCore' => '2.20.0',
 		);
@@ -144,12 +144,19 @@ class ReThemingPlugin extends MantisPlugin {
 
 	/**
 	 * Build a <link> tag for a plugin-relative stylesheet path.
+	 *
+	 * plugin_file.php serves these with "Cache-Control: private, max-age=
+	 * 10800" (3 hours) and a URL that never otherwise changes, so without
+	 * a cache-busting query string, browsers keep serving an edited
+	 * theme's *previous* content for up to 3 hours after the file on disk
+	 * changes. Tagging the URL with the plugin version forces a fresh
+	 * fetch whenever that version is bumped.
 	 * @param string $p_path Path relative to files/, e.g. 'themes/_base.css'.
 	 * @return string
 	 */
 	private function stylesheet_link( $p_path ) {
-		return '<link rel="stylesheet" type="text/css" href="'
-			. string_attribute( plugin_file( $p_path ) ) . '" />' . "\n";
+		$t_url = helper_url_combine( plugin_file( $p_path ), array( 'v' => $this->version ) );
+		return '<link rel="stylesheet" type="text/css" href="' . string_attribute( $t_url ) . '" />' . "\n";
 	}
 
 	/**
