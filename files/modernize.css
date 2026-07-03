@@ -127,3 +127,53 @@ input[type="radio"].ace + .lbl::before {
 input[type="radio"].ace + .lbl::before {
 	border-radius: 50%;
 }
+
+/* User avatars (Gravatar plugin, timeline, navbar) - the <img> class is
+   dynamically built as "<prefix>-avatar-<size>" per caller, so there's no
+   single stable class name; match on the "avatar" substring instead. */
+img[class*="avatar"] {
+	border-radius: 50%;
+}
+
+/* Roadmap progress bars: bootstrap already gives these a 4px radius, but
+   a full pill reads as more distinctly "modern" than a slightly-rounded
+   rectangle. .progress's overflow:hidden clips .progress-bar to match,
+   so only the outer element needs the radius. */
+.progress {
+	border-radius: 999px;
+}
+
+/* Widget header icon buttons (collapse/reload/close) currently have no
+   hover feedback at all beyond removing the underline. */
+.widget-toolbar > a,
+.widget-toolbar > .widget-menu > a {
+	border-radius: 4px;
+	padding: 2px 4px;
+	transition: background-color 0.15s ease;
+}
+.widget-toolbar > a:hover,
+.widget-toolbar > .widget-menu > a:hover {
+	background-color: rgba(128, 128, 128, 0.25);
+}
+
+/* Thinner scrollbars. scrollbar-color is skipped on purpose (Firefox
+   requires explicit colors there, which would break the "no color
+   choices" rule this file otherwise holds to) - scrollbar-width alone
+   still gets Firefox most of the way. The neutral, semi-transparent
+   webkit thumb color is deliberately theme-agnostic: it blends
+   reasonably against both light and dark surfaces via alpha, rather
+   than being tuned to any one palette. */
+* {
+	scrollbar-width: thin;
+}
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+::-webkit-scrollbar-thumb {
+	background-color: rgba(128, 128, 128, 0.5);
+	border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(128, 128, 128, 0.7);
+}

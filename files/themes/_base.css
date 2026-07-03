@@ -268,6 +268,26 @@ textarea[readonly] {
 	border-color: var(--rt-border, #2a2e37);
 }
 
+/* Timeline entries (My View widget, user profile). ace.css hardcodes
+   :hover to a light near-white background independently of any theme -
+   plain (unlinked) text inside inherits our light theme foreground
+   color, so hovering made it briefly invisible: light text on what had
+   become a light background. Give the hover its own themed background
+   instead of chasing every text color it touches. */
+.profile-activity {
+	border-bottom-color: var(--rt-border, #2a2e37);
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+.profile-activity:first-child:hover {
+	border-top-color: var(--rt-border, #2a2e37);
+}
+.profile-activity:hover {
+	background-color: var(--rt-hover, #2b2f38);
+	border-left-color: var(--rt-border, #2a2e37);
+	border-right-color: var(--rt-border, #2a2e37);
+}
+
 /* Dropdowns / menus. Descendant (not direct-child) selectors: some
    menus (e.g. the navbar's project switcher) wrap their <li> items in an
    extra nested <ul class="list">, so a ">" combinator here would miss

@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.4.2
+
+- Fixed timeline entries (My View widget, user profile) going briefly
+  unreadable on hover: `ace.css`'s `.profile-activity:hover` hardcodes a
+  light near-white background independently of any theme, and plain
+  (unlinked) text inside - e.g. "created issue" - inherits our light
+  theme foreground color, so hovering made it light-text-on-light-
+  background. Themed the hover background itself (and the entry's
+  dotted borders, previously white/light-gray) instead of chasing every
+  text color it touches - same pattern as the earlier dropdown-yellow and
+  breadcrumb fixes.
+
+## 0.4.1
+
+- Extended Modernize to a few more spots: circular user avatars (matched
+  by an `[class*="avatar"]` substring selector, since the actual class is
+  built dynamically per caller as `<prefix>-avatar-<size>`), pill-shaped
+  Roadmap progress bars, hover feedback on widget header icon buttons
+  (collapse/reload/close - previously had none beyond removing the
+  underline), and thinner scrollbars (`scrollbar-width: thin` plus
+  `::-webkit-scrollbar` for Safari/older Chrome, using a neutral
+  semi-transparent gray thumb rather than a theme color, to keep this
+  file's "no color choices" rule intact).
+
 ## 0.4.0
 
 - Added an "Inherit (site default)" option to the per-user Theme dropdown

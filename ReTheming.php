@@ -92,7 +92,7 @@ class ReThemingPlugin extends MantisPlugin {
 		$this->description = plugin_lang_get( 'description' );
 		$this->page = 'config_page';
 
-		$this->version = '0.4.0';
+		$this->version = '0.4.2';
 		$this->requires = array(
 			'MantisCore' => '2.20.0',
 		);
