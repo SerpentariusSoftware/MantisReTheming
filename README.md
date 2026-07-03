@@ -1,6 +1,6 @@
 # MantisBT Re-Theming Plugin
 
-**Version 1.0.0**
+**Version 1.0.1**
 
 Lets an administrator pick a site-wide default theme for MantisBT, and lets
 each user override it with their own choice from the same curated list of
