@@ -97,9 +97,9 @@ class ReThemingPlugin extends MantisPlugin {
 			'MantisCore' => '2.20.0',
 		);
 
-		$this->author = 'MantisBT Local';
+		$this->author = 'Herczeg Szilard @ Serpentarius';
 		$this->contact = 'admin@mantis.local';
-		$this->url = 'https://mantisbt.org';
+		$this->url = 'https://serpentarius.hu/';
 	}
 
 	/**
