@@ -1,5 +1,36 @@
 # Changelog
 
+## 1.0.0
+
+Initial stable release.
+
+- Site-wide default theme, selectable by an administrator from the
+  plugin's config page under Manage Plugins.
+- Per-user theme override from My Account -> Preferences, including an
+  "Inherit (site default)" option that keeps following the site-wide
+  default even as an admin changes it later, rather than freezing on
+  whatever it was at the time.
+- Six built-in color themes - Default (MantisBT's stock look, untouched),
+  Dark (in-house), Dracula, Nord, One Dark, Gruvbox Dark, and Solarized
+  Dark - each a small ~20-property palette file layered on one shared
+  structural stylesheet (`files/themes/_base.css`), so adding a new theme
+  never needs touching selector logic.
+- "Modernize": an optional, color-agnostic structural refresh (rounded
+  corners, softer shadows, more breathing room, circular avatars, pill
+  progress bars, thinner scrollbars) that layers on top of any theme (or
+  none), with the same site-wide-default/per-user-override pattern as the
+  theme picker.
+- No core files patched - themes and Modernize are linked in via
+  `EVENT_LAYOUT_RESOURCES`, ordered to load after all of MantisBT's own
+  stylesheets so they reliably win the cascade, and cache-busted with a
+  `?v=<plugin version>` parameter so edits take effect promptly.
+- Translations: English, German, Spanish, Hungarian.
+
+The `0.x` entries below are kept as development history - several
+document specific MantisBT/ACE CSS cascade quirks (hardcoded
+`!important` rules, colored dropdown utility classes, specificity traps)
+that are worth knowing about for anyone extending this plugin's themes.
+
 ## 0.4.2
 
 - Fixed timeline entries (My View widget, user profile) going briefly
