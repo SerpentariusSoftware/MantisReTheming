@@ -123,6 +123,19 @@ table {
 	background-color: var(--rt-surface, #22252c) !important;
 	border-color: var(--rt-border, #2a2e37);
 }
+/* The login/signup/lost-password box (#login-box) carries MantisBT's own
+   "no-border" class, which zeroes border-*width*, not just color - no
+   border-color override could ever show through that. It also needs one
+   more than most: a few palettes deliberately reuse the same hex for
+   --rt-bg and --rt-surface (matching their source project's single
+   canonical "background" color), so without a border, that box has
+   nothing at all separating it from the page behind it. #login-box's ID
+   specificity beats .no-border's class regardless of load order. */
+#login-box {
+	border-width: 1px;
+	border-style: solid;
+	border-color: var(--rt-border, #2a2e37);
+}
 .widget-header {
 	background-color: var(--rt-surface-alt, #262a32) !important;
 	border-color: var(--rt-border, #2a2e37);

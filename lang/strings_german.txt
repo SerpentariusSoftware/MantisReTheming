@@ -8,8 +8,10 @@ $s_plugin_ReTheming_description = 'Ermöglicht Administratoren die Auswahl eines
 
 $s_plugin_ReTheming_config_title = 'Re-Theming Konfiguration';
 $s_plugin_ReTheming_default_theme = 'Standarddesign';
+$s_plugin_ReTheming_default_modernize = 'Standardmäßig modernisieren';
 
 $s_plugin_ReTheming_theme = 'Design';
+$s_plugin_ReTheming_theme_inherit = 'Übernehmen (Standard der Seite)';
 $s_plugin_ReTheming_theme_default = 'Standard';
 $s_plugin_ReTheming_theme_dark = 'Dunkel';
 $s_plugin_ReTheming_theme_dracula = 'Dracula';
@@ -17,5 +19,7 @@ $s_plugin_ReTheming_theme_nord = 'Nord';
 $s_plugin_ReTheming_theme_one_dark = 'One Dark';
 $s_plugin_ReTheming_theme_gruvbox_dark = 'Gruvbox Dark';
 $s_plugin_ReTheming_theme_solarized_dark = 'Solarized Dark';
+
+$s_plugin_ReTheming_modernize = 'Modernisieren (abgerundete Ecken, Schatten, mehr Abstand)';
 
 $s_plugin_ReTheming_action_update = 'Einstellungen speichern';

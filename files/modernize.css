@@ -1,0 +1,129 @@
+/**
+ * Re-Theming Plugin - "Modernize" structural refresh
+ *
+ * Unlike the theme system (files/themes/), this is deliberately
+ * color-agnostic: no background-color/color/border-color declarations,
+ * so it layers cleanly on top of any theme (or none, i.e. MantisBT's
+ * stock light look) without needing its own palette. Just spacing,
+ * corner radius, shadows, and a couple of typography/transition
+ * touch-ups - same layout and information density, just softer edges
+ * and more breathing room than ACE's stock 2013-era square-corners look.
+ *
+ * Loaded after the active theme's stylesheets (see
+ * ReThemingPlugin::on_layout_resources()), in case a theme's rule would
+ * otherwise need overriding here too - in practice the two rarely touch
+ * the same properties.
+ */
+
+:root {
+	--rt-radius: 8px;
+	--rt-radius-sm: 5px;
+	--rt-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.08);
+	--rt-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+body {
+	line-height: 1.5;
+}
+
+/* Widgets (the boxed panels used throughout MantisBT): rounded card with
+   a soft shadow instead of a flat 1px border as the only definition. */
+.widget-box {
+	border-radius: var(--rt-radius);
+	box-shadow: var(--rt-shadow);
+	overflow: visible;
+}
+.widget-header {
+	/* ace.css gives this a linear-gradient background image; flattening
+	   it reads as more modern regardless of which color is underneath. */
+	background-image: none !important;
+	border-radius: var(--rt-radius) var(--rt-radius) 0 0;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+.widget-box.collapsed > .widget-header {
+	border-radius: var(--rt-radius);
+}
+.widget-toolbox {
+	border-radius: 0 0 var(--rt-radius) var(--rt-radius);
+}
+
+/* Buttons: ace.css forces box-shadow:none and border-radius:0 with
+   !important on .btn, so both need matching !important here. */
+.btn {
+	border-radius: var(--rt-radius-sm) !important;
+	transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.05s ease;
+}
+.btn:active {
+	transform: translateY(1px);
+}
+.btn-white,
+.btn-primary,
+.btn-success,
+.btn-info,
+.btn-warning,
+.btn-danger {
+	box-shadow: var(--rt-shadow-sm) !important;
+}
+
+/* Form controls */
+.input-sm,
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+textarea,
+select,
+.form-control {
+	border-radius: var(--rt-radius-sm);
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Dropdowns, tooltips-as-menus */
+.dropdown-menu {
+	border-radius: var(--rt-radius-sm);
+	box-shadow: var(--rt-shadow);
+}
+
+/* Alerts (bootstrap already gives these a 4px radius; bump slightly to
+   match the rest of the softened UI) */
+.alert {
+	border-radius: var(--rt-radius-sm);
+}
+
+/* Badges and labels */
+.badge {
+	border-radius: 10px;
+}
+
+/* Sidebar nav items: soften the hover/active link itself. ACE's colored
+   left-edge indicator bars (:before/:after) are left alone - a thin
+   accent bar plus a softened pill is a common, still-subtle pairing. */
+.skin-3 .nav-list > li > a {
+	border-radius: 0 var(--rt-radius-sm) var(--rt-radius-sm) 0;
+	transition: background-color 0.15s ease;
+}
+
+/* Navbar: a soft shadow reads as more modern than a hard 1px edge. */
+.skin-3 .navbar,
+#navbar {
+	box-shadow: var(--rt-shadow-sm);
+}
+
+/* Pagination / pager */
+.pagination > li > a,
+.pager > li > a {
+	border-radius: var(--rt-radius-sm);
+	transition: background-color 0.15s ease;
+}
+
+/* ACE checkboxes/radios */
+input[type="checkbox"].ace + .lbl::before,
+input[type="radio"].ace + .lbl::before {
+	border-radius: 4px;
+	transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+input[type="radio"].ace + .lbl::before {
+	border-radius: 50%;
+}

@@ -1,7 +1,31 @@
 # Changelog
 
-## Unreleased
+## 0.4.0
 
+- Added an "Inherit (site default)" option to the per-user Theme dropdown
+  (My Account -> Preferences only, not the admin config page). Stores a
+  sentinel value that always re-resolves to the site-wide default at
+  render time, so a user who previously set a concrete theme can opt back
+  into following the admin's choice going forward, instead of having to
+  pick whatever that value currently happens to be.
+- Fixed the login/signup/lost-password box (`#login-box`) blending into
+  the page background on themes where `--rt-bg` and `--rt-surface` are
+  the same color (Dracula, One Dark, Gruvbox Dark all intentionally reuse
+  their source project's single canonical "background" for both): that
+  box carries MantisBT's own `no-border` class, which zeroes
+  border-*width* (not just color), so no border-color override could
+  ever have shown through it regardless of theme.
+
+## 0.3.0
+
+- Added "Modernize": a structural refresh (rounded corners, softer
+  shadows instead of flat borders, more breathing room, smoother
+  transitions) that's independent of color choice - it's a checkbox, not
+  a theme, and layers on top of Default or any color theme. Same
+  global-default/per-user-override pattern as the theme picker (admin
+  config page + My Account -> Preferences). Deliberately has no
+  background-color/color/border-color rules of its own so it doesn't need
+  a palette or interact with the theme system at all.
 - Fixed the breadcrumb bar (and its "Recently Visited: <id>" text)
   staying light blue: `ace-skins.css` sets `.skin-3 .breadcrumbs {
   background-color: #E7F2F8 }`, which outranks a plain `.breadcrumbs`

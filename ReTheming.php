@@ -32,6 +32,19 @@
  */
 class ReThemingPlugin extends MantisPlugin {
 	/**
+	 * Sentinel 'theme' value: only ever stored against a specific user id
+	 * (My Account > Preferences), never as the site-wide default (it's
+	 * not offered on the admin config page). Means "no personal
+	 * preference - always resolve to whatever the site-wide default is
+	 * *at page-render time*". A user with no row at all already falls
+	 * back to the site-wide default too, but only as read; explicitly
+	 * storing this instead means a user who *had* set a concrete theme
+	 * before can deliberately revert to following the site default again,
+	 * and it stays that way rather than being a one-time snapshot.
+	 */
+	const THEME_INHERIT = 'inherit';
+
+	/**
 	 * Curated theme registry: key => [ lang string key for its label,
 	 * palette stylesheet path relative to files/themes/ (or null for
 	 * MantisBT's unmodified default look, which needs no extra
@@ -79,7 +92,7 @@ class ReThemingPlugin extends MantisPlugin {
 		$this->description = plugin_lang_get( 'description' );
 		$this->page = 'config_page';
 
-		$this->version = '0.2.0';
+		$this->version = '0.4.0';
 		$this->requires = array(
 			'MantisCore' => '2.20.0',
 		);
@@ -101,6 +114,12 @@ class ReThemingPlugin extends MantisPlugin {
 			# option name, MantisBT's config resolution picks the user's
 			# row over the global one automatically.
 			'theme' => 'default',
+
+			# Whether the "Modernize" structural refresh (spacing, corner
+			# radius, shadows, no other color-scoped choices) is layered on
+			# top of the color theme above. Same global-default/per-user-
+			# override pattern as 'theme'.
+			'modernize' => OFF,
 		);
 	}
 
@@ -132,13 +151,31 @@ class ReThemingPlugin extends MantisPlugin {
 	 * @return string
 	 */
 	function on_layout_resources() {
-		$t_theme = $this->theme_definition( plugin_config_get( 'theme' ) );
-		if( $t_theme['css'] === null ) {
-			return '';
+		$t_html = '';
+
+		$t_theme_key = plugin_config_get( 'theme' );
+		if( self::THEME_INHERIT === $t_theme_key ) {
+			# A user explicitly chose "Inherit"; re-resolve against the
+			# site-wide default only, so they keep following it even as an
+			# admin changes it later, rather than freezing on whatever it
+			# happened to be when they picked Inherit.
+			$t_theme_key = plugin_config_get( 'theme', 'default', false, ALL_USERS );
 		}
 
-		$t_html = $this->stylesheet_link( 'themes/_base.css' );
-		$t_html .= $this->stylesheet_link( 'themes/' . $t_theme['css'] );
+		$t_theme = $this->theme_definition( $t_theme_key );
+		if( $t_theme['css'] !== null ) {
+			$t_html .= $this->stylesheet_link( 'themes/_base.css' );
+			$t_html .= $this->stylesheet_link( 'themes/' . $t_theme['css'] );
+		}
+
+		# Modernize is a structural refresh (spacing/radius/shadows), not a
+		# color choice, so it's independent of - and loads after, in case
+		# it needs to soften something a theme set - whichever theme (or
+		# none) is active above.
+		if( ON == plugin_config_get( 'modernize' ) ) {
+			$t_html .= $this->stylesheet_link( 'modernize.css' );
+		}
+
 		return $t_html;
 	}
 
@@ -167,7 +204,8 @@ class ReThemingPlugin extends MantisPlugin {
 	 * @return void
 	 */
 	function on_account_pref_update_form( $p_event, $p_user_id ) {
-		$t_current = plugin_config_get( 'theme', 'default', false, $p_user_id );
+		$t_current_theme = plugin_config_get( 'theme', 'default', false, $p_user_id );
+		$t_current_modernize = plugin_config_get( 'modernize', OFF, false, $p_user_id );
 		?>
 		<tr>
 			<td class="category">
@@ -175,10 +213,22 @@ class ReThemingPlugin extends MantisPlugin {
 			</td>
 			<td>
 				<select id="theme" name="theme" class="input-sm">
+					<option value="<?php echo self::THEME_INHERIT ?>" <?php echo $t_current_theme == self::THEME_INHERIT ? 'selected' : '' ?>><?php echo plugin_lang_get( 'theme_inherit' ) ?></option>
 					<?php foreach( self::$themes as $t_key => $t_definition ) { ?>
-					<option value="<?php echo $t_key ?>" <?php echo $t_current == $t_key ? 'selected' : '' ?>><?php echo plugin_lang_get( $t_definition['label'] ) ?></option>
+					<option value="<?php echo $t_key ?>" <?php echo $t_current_theme == $t_key ? 'selected' : '' ?>><?php echo plugin_lang_get( $t_definition['label'] ) ?></option>
 					<?php } ?>
 				</select>
+			</td>
+		</tr>
+		<tr>
+			<td class="category">
+				<?php echo plugin_lang_get( 'modernize' ) ?>
+			</td>
+			<td>
+				<label class="inline">
+					<input type="checkbox" class="ace" id="modernize" name="modernize" <?php check_checked( (int)$t_current_modernize, ON ); ?> />
+					<span class="lbl"></span>
+				</label>
 			</td>
 		</tr>
 		<?php
@@ -192,12 +242,17 @@ class ReThemingPlugin extends MantisPlugin {
 	 */
 	function on_account_pref_update( $p_event, $p_user_id ) {
 		$t_theme = gpc_get_string( 'theme', 'default' );
-		if( !isset( self::$themes[$t_theme] ) ) {
+		if( self::THEME_INHERIT !== $t_theme && !isset( self::$themes[$t_theme] ) ) {
 			$t_theme = 'default';
 		}
 
 		if( $t_theme != plugin_config_get( 'theme', 'default', false, $p_user_id ) ) {
 			plugin_config_set( 'theme', $t_theme, $p_user_id );
+		}
+
+		$t_modernize = gpc_get_bool( 'modernize' ) ? ON : OFF;
+		if( $t_modernize != plugin_config_get( 'modernize', OFF, false, $p_user_id ) ) {
+			plugin_config_set( 'modernize', $t_modernize, $p_user_id );
 		}
 	}
 

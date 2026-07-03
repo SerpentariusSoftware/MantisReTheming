@@ -9,10 +9,11 @@ layout_page_begin( 'manage_overview_page.php' );
 
 print_manage_menu( 'manage_plugin_page.php' );
 
-# Read the site-wide default explicitly (ALL_USERS), not the value resolved
-# for the admin's own account - those are two different things and the
-# current user may well have their own personal override set.
+# Read the site-wide defaults explicitly (ALL_USERS), not the value
+# resolved for the admin's own account - those are two different things
+# and the current user may well have their own personal override set.
 $t_current_theme = plugin_config_get( 'theme', 'default', false, ALL_USERS );
+$t_current_modernize = plugin_config_get( 'modernize', OFF, false, ALL_USERS );
 ?>
 
 <div class="col-md-12 col-xs-12">
@@ -42,6 +43,16 @@ $t_current_theme = plugin_config_get( 'theme', 'default', false, ALL_USERS );
 				<option value="<?php echo $t_key ?>" <?php echo $t_current_theme == $t_key ? 'selected' : '' ?>><?php echo plugin_lang_get( $t_definition['label'] ) ?></option>
 				<?php } ?>
 			</select>
+		</td>
+	</tr>
+
+	<tr>
+		<td class="category"><?php echo plugin_lang_get( 'default_modernize' ) ?></td>
+		<td>
+			<label class="inline">
+				<input type="checkbox" class="ace" id="modernize" name="modernize" <?php check_checked( (int)$t_current_modernize, ON ); ?> />
+				<span class="lbl"></span>
+			</label>
 		</td>
 	</tr>
 

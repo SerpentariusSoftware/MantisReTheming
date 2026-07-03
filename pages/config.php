@@ -15,6 +15,11 @@ if( $t_theme != plugin_config_get( 'theme', 'default', false, ALL_USERS ) ) {
 	plugin_config_set( 'theme', $t_theme, ALL_USERS );
 }
 
+$t_modernize = gpc_get_bool( 'modernize' ) ? ON : OFF;
+if( $t_modernize != plugin_config_get( 'modernize', OFF, false, ALL_USERS ) ) {
+	plugin_config_set( 'modernize', $t_modernize, ALL_USERS );
+}
+
 form_security_purge( 'plugin_ReTheming_config' );
 
 $t_redirect_url = plugin_page( 'config_page', true );
